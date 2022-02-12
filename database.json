@@ -2,14 +2,14 @@
 	"dev": {
 		"driver": "pg",
 		"host": "127.0.0.1",
-		"database": "new_data",
+		"database": "store_backend_dev",
 		"user": "postgres",
 		"password": "polypostgres"
 	},
 	"test": {
 		"driver": "pg",
 		"host": "127.0.0.1",
-		"database": "new_data_test",
+		"database": "store_backend_test",
 		"user": "postgres",
 		"password": "polypostgres"
 	}
