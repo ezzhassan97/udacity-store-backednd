@@ -1,0 +1,16 @@
+{
+	"dev": {
+		"driver": "pg",
+		"host": "127.0.0.1",
+		"database": "new_data",
+		"user": "postgres",
+		"password": "polypostgres"
+	},
+	"test": {
+		"driver": "pg",
+		"host": "127.0.0.1",
+		"database": "new_data_test",
+		"user": "postgres",
+		"password": "polypostgres"
+	}
+}
