@@ -25,18 +25,16 @@ describe("user Model", () => {
 
 	it("create method should add a user", async () => {
 		const result = await store.create({
-			id: 1,
 			firstname: "ezz",
 			lastname: "hassan",
-			username: "ezzhassan",
-			password_digest: "ezz",
+			type: "Childrens",
 		});
 		expect(result).toEqual({
-			id: 1,
-			firstname: "ezz",
-			lastname: "hassan",
-			username: "ezzhassan",
-			password_digest: "ezz",
+			id: "1",
+			title: "Bridge to Terabithia",
+			total_pages: 250,
+			author: "Katherine Paterson",
+			type: "Childrens",
 		});
 	});
 
@@ -44,11 +42,11 @@ describe("user Model", () => {
 		const result = await store.index();
 		expect(result).toEqual([
 			{
-				id: 1,
-				firstname: "ezz",
-				lastname: "hassan",
-				username: "ezzhassan",
-				password_digest: "ezz",
+				id: "1",
+				title: "Bridge to Terabithia",
+				total_pages: 250,
+				author: "Katherine Paterson",
+				type: "Childrens",
 			},
 		]);
 	});
@@ -56,11 +54,18 @@ describe("user Model", () => {
 	it("show method should return the correct user", async () => {
 		const result = await store.show("1");
 		expect(result).toEqual({
-			id: 1,
-			firstname: "ezz",
-			lastname: "hassan",
-			username: "ezzhassan",
-			password_digest: "ezz",
+			id: "1",
+			title: "Bridge to Terabithia",
+			total_pages: 250,
+			author: "Katherine Paterson",
+			type: "Childrens",
 		});
+	});
+
+	it("delete method should remove the user", async () => {
+		store.delete("1");
+		const result = await store.index();
+
+		expect(result).toEqual([]);
 	});
 });

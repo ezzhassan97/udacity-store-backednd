@@ -22,6 +22,8 @@ const create = async (req: Request, res: Response) => {
 	try {
 		const user: User = {
 			username: req.body.username,
+			firstname: req.body.firstname,
+			lastname: req.body.lastname,
 			password_digest: req.body.password,
 		};
 		const newUser = await store.create(user);
@@ -32,28 +34,12 @@ const create = async (req: Request, res: Response) => {
 		res.json(err);
 	}
 };
-// DELETE FUNCTION for USERS TABLE
-const destroy = async (req: Request, res: Response) => {
-	const deleted = await store.delete(req.body.id);
-	res.json(deleted);
-};
-
-const update = async (req: Request, res: Response) => {
-	const updated = await store.update(
-		req.body.id,
-		req.body.username,
-		req.body.password
-	);
-	res.json(updated);
-};
 
 // CRUD ROUTES for USERS TABLE
 const userRoutes = (app: express.Application) => {
 	app.get("/users", index);
 	app.get("/users/:id", show);
 	app.post("/users", verifyAuthToken, create);
-	app.delete("/users", verifyAuthToken, destroy);
-	app.put("/users/:id", verifyAuthToken, update);
 };
 
 const verifyAuthToken = (req: Request, res: Response, next: NextFunction) => {
@@ -63,7 +49,7 @@ const verifyAuthToken = (req: Request, res: Response, next: NextFunction) => {
 			? authorizationHeader.split(" ")[1]
 			: "dummytoken";
 		const decoded = jwt.verify(token, TOKEN_SECRET);
-
+		return decoded;
 		next();
 	} catch (error) {
 		res.status(401);

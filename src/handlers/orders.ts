@@ -1,22 +1,56 @@
-const orderRoutes = (app: express.Application) => {
-	app.get("/orders", index);
-	app.get("/orders/:id", show);
-	app.post("/orders", create);
-	// add product
-	app.post("/orders/:id/products", addProduct);
+import express, { application, NextFunction, Request, Response } from "express";
+import { order, orderStore } from "../models/orders";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+dotenv.config();
+
+const TOKEN_SECRET = "token_secret";
+const store = new orderStore();
+
+// INDEX FUNCTION for USERS TABLE
+const index = async (req: Request, res: Response) => {
+	const users = await store.index();
+	res.json(users);
 };
-
-// ... other methods
-const addProduct = async (_req: Request, res: Response) => {
-	const orderId: string = _req.params.id;
-	const productId: string = _req.body.productId;
-	const quantity: number = parseInt(_req.body.quantity);
-
+// SHOW FUNCTION for USERS TABLE
+const show = async (req: Request, res: Response) => {
+	const user = await store.show(req.body.id);
+	res.json(user);
+};
+// CREATE NEW USER FUNCTION for USERS TABLE
+const create = async (req: Request, res: Response) => {
 	try {
-		const addedProduct = await store.addProduct(quantity, orderId, productId);
-		res.json(addedProduct);
+		const order: order = {
+			user_id: req.body.user_id,
+		};
+		const newUser = await store.create(order);
+		var token = jwt.sign({ user: newUser }, TOKEN_SECRET);
+		res.json(token);
 	} catch (err) {
 		res.status(400);
 		res.json(err);
 	}
 };
+
+// CRUD ROUTES for USERS TABLE
+const orderRoutes = (app: express.Application) => {
+	app.get("/orders", index);
+	app.get("/orders/:id", show);
+	app.post("/orders", verifyAuthToken, create);
+};
+
+const verifyAuthToken = (req: Request, res: Response, next: NextFunction) => {
+	try {
+		const authorizationHeader = req.headers.authorization;
+		const token = authorizationHeader
+			? authorizationHeader.split(" ")[1]
+			: "dummytoken";
+		const decoded = jwt.verify(token, TOKEN_SECRET);
+		return decoded;
+		next();
+	} catch (error) {
+		res.status(401);
+	}
+};
+
+export default orderRoutes;
