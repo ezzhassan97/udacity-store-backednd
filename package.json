@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "node src/server.ts",
 		"watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
-		"test": "ENV=test db-migrate --env test up && jasmine-ts && db-migrate db:drop test",
+		"test": " db-migrate --env test up && jasmine-ts && db-migrate db:drop test",
 		"tsc": "tsc"
 	},
 	"author": "Udacity",
@@ -20,6 +20,7 @@
 		"express": "^4.17.2",
 		"jsonwebtoken": "^8.5.1",
 		"pg": "^8.7.3",
+		"supertest": "^6.2.2",
 		"tslib": "^2.3.1"
 	},
 	"devDependencies": {
@@ -29,6 +30,7 @@
 		"@types/jasmine": "^3.10.3",
 		"@types/jsonwebtoken": "^8.5.8",
 		"@types/pg": "^7.14.11",
+		"@types/supertest": "^2.0.11",
 		"dotenv": "^16.0.0",
 		"jasmine": "^3.99.0",
 		"jasmine-spec-reporter": "^6.0.0",
