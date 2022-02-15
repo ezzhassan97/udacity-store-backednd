@@ -112,3 +112,17 @@ Add JWT functionality as shown in the course. Make sure that JWTs are required f
 Before submitting, make sure that your project is complete with a `README.md`. Your `README.md` must include instructions for setting up and running your project including how you setup, run, and connect to your database.
 
 Before submitting your project, spin it up and test each endpoint. If each one responds with data that matches the data shapes from the `REQUIREMENTS.md`, it is ready for submission!
+
+## Environment Variables
+
+- DB_NAME = store_backend_dev
+- DB_HOST = localhost
+- DB_NAME_TEST = store_backend_test
+- DB_PORT = 5432
+- DB_USER = store_user
+- DB_PASS= password123
+- BCRYPT_PASSWORD=my-name-is-enow-2021
+- SALT_ROUNDS=10
+- TOKEN_TEST = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.J8BgsyqA3Y6F71NXbfuYIfRVuvRa_qb08RStxrCVhlQ
+- JWT_SECRET = 5ae8adc9731627905ebf0905dbe4a114ba7d8354ae1796772dfa523a2142761b78d48cbfcd98000bb94fbdbd8147f30de6b3484c3a060d389068204df6a50630
+- ENV = dev
