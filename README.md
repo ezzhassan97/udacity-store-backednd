@@ -120,7 +120,7 @@ Before submitting your project, spin it up and test each endpoint. If each one r
 - DB_NAME_TEST = store_backend_test
 - DB_PORT = 5432
 - DB_USER = store_user
-- DB_PASS= password123
+- DB_PASSWORD= password123
 - BCRYPT_PASSWORD=my-name-is-enow-2021
 - SALT_ROUNDS=10
 - TOKEN_TEST = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.J8BgsyqA3Y6F71NXbfuYIfRVuvRa_qb08RStxrCVhlQ
