@@ -21,6 +21,7 @@ const show = async (req: Request, res: Response) => {
 const create = async (req: Request, res: Response) => {
 	try {
 		const order: order = {
+			id: req.body.id,
 			user_id: req.body.user_id,
 		};
 		const newUser = await store.create(order);

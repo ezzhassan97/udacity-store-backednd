@@ -1,4 +1,4 @@
-import { user, userStore } from "../users";
+import { User, userStore } from "../users";
 
 const store = new userStore();
 
