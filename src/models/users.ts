@@ -28,7 +28,7 @@ export class userStore {
 		}
 	}
 
-	async show(id: string): Promise<User[]> {
+	async show(id: Number): Promise<User[]> {
 		try {
 			const sql = "SELECT * FROM users WHERE id=($1)";
 			// @ts-ignore
@@ -47,7 +47,7 @@ export class userStore {
 	async create(u: User): Promise<User[]> {
 		try {
 			const sql =
-				"INSERT INTO (firstname,lastname, password_digest) VALUES($1, $2,$3) RETURNING *";
+				"INSERT INTO (firstname,lastname,username, password_digest) VALUES($1, $2,$3,$4) RETURNING *";
 			// @ts-ignore
 			const conn = await client.connect();
 

@@ -4,9 +4,11 @@
 	"description": "",
 	"main": "server.ts",
 	"scripts": {
-		"start": "node src/server.ts",
-		"watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
-		"test": " db-migrate --env test up && jasmine-ts && db-migrate db:drop test",
+		"start": "node build/server.js",
+		"jasmine": "jasmine",
+		"watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./build --onSuccess 'node ./build/server.js'",
+		"migrate": " db-migrate up --e test && db-migrate down - test",
+		"test": "npm run build && npm run jasmine ",
 		"tsc": "tsc",
 		"build": "npx tsc"
 	},
@@ -21,7 +23,6 @@
 		"express": "^4.17.2",
 		"jsonwebtoken": "^8.5.1",
 		"pg": "^8.7.3",
-		"supertest": "^6.2.2",
 		"tslib": "^2.3.1"
 	},
 	"devDependencies": {
@@ -37,6 +38,7 @@
 		"jasmine-spec-reporter": "^6.0.0",
 		"jasmine-ts": "^0.3.0",
 		"nodemon": "^2.0.15",
+		"supertest": "^6.2.2",
 		"ts-node": "^9.1.1",
 		"tsc-watch": "^4.6.0",
 		"typescript": "^4.5.5"

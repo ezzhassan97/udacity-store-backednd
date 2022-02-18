@@ -1,4 +1,4 @@
-import client from "../src/database";
+import client from "../database";
 
 export class DashboardQueries {
 	// Get all products that have been included in orders
