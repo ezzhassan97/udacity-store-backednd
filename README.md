@@ -83,11 +83,11 @@ We shall create the dev and test database.
   - `CREATE DATABASE store_backend_test;`
 - Connect to the databases and grant all privileges
   - Grant for dev database
-    - `\c shopping`
-    - `GRANT ALL PRIVILEGES ON DATABASE shopping TO full_stack_user;`
+    - `\c store_backend_dev`
+    - `GRANT ALL PRIVILEGES ON DATABASE store_backend_dev TO full_stack_user;`
   - Grant for test database
-    - `\c shopping_test`
-    - `GRANT ALL PRIVILEGES ON DATABASE shopping_test TO full_stack_user;`
+    - `\c store_backend_test`
+    - `GRANT ALL PRIVILEGES ON DATABASE store_backend_test TO full_stack_user;`
 
 ### migration
 
@@ -125,4 +125,4 @@ Before submitting your project, spin it up and test each endpoint. If each one r
 - SALT_ROUNDS=10
 - TOKEN_TEST = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.J8BgsyqA3Y6F71NXbfuYIfRVuvRa_qb08RStxrCVhlQ
 - JWT_SECRET = 5ae8adc9731627905ebf0905dbe4a114ba7d8354ae1796772dfa523a2142761b78d48cbfcd98000bb94fbdbd8147f30de6b3484c3a060d389068204df6a50630
-- ENV = dev
+- ENV = test

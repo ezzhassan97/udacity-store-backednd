@@ -4,10 +4,10 @@
 	"description": "",
 	"main": "server.ts",
 	"scripts": {
-		"start": "node build/server.js",
+		"start": "node dist/server.js",
 		"jasmine": "jasmine",
-		"watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./build --onSuccess 'node ./build/server.js'",
-		"migrate": " db-migrate up --e test && db-migrate down - test",
+		"watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
+		"migrate": " db-migrate up -e test && db-migrate down -e test",
 		"test": "npm run build && npm run jasmine ",
 		"tsc": "tsc",
 		"build": "npx tsc"

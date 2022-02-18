@@ -47,16 +47,16 @@ export class userStore {
 	async create(u: User): Promise<User[]> {
 		try {
 			const sql =
-				"INSERT INTO (firstname,lastname,username, password_digest) VALUES($1, $2,$3,$4) RETURNING *";
+				"INSERT INTO (username,firstname,lastname, password_digest) VALUES($1,$2,$3,$4) RETURNING *";
 			// @ts-ignore
 			const conn = await client.connect();
 
 			const hash = bcrypt.hashSync(u.password_digest, saltRounds);
 
 			const result = await conn.query(sql, [
+				u.username,
 				u.firstname,
 				u.lastname,
-				u.username,
 				hash,
 			]);
 
