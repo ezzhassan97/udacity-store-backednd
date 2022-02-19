@@ -1,6 +1,6 @@
 {
-	"spec_dir": "dist/models/tests",
-	"spec_files": ["../**/tests/*[sS]pecs.js"],
+	"spec_dir": "dist/tests",
+	"spec_files": ["**/*[sS]pecs.js"],
 	"helpers": ["helpers/**/*.js"],
 	"reporters": [
 		{
@@ -11,5 +11,5 @@
 		}
 	],
 	"stopSpecOnExpectationFailure": false,
-	"random": true
+	"random": false
 }
