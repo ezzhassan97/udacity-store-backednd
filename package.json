@@ -8,7 +8,11 @@
 		"jasmine": "jasmine",
 		"watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
 		"migrate": " db-migrate up -e test && db-migrate down -e test",
-		"test": "npm run build && npm run jasmine ",
+		"test-up": "db-migrate up -e test",
+		"test-down": "db-migrate down -e test",
+		"dev-up": "db-migrate up -e test",
+		"dev-down": "db-migrate down -e test",
+		"test": "npm run test-up && npm run build && npm run jasmine ",
 		"tsc": "tsc",
 		"build": "npx tsc"
 	},

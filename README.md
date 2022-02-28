@@ -93,7 +93,10 @@ We shall create the dev and test database.
 
 Run the following command in the root directory
 
-- `db-migrate up`
+- `test-up": "db-migrate up -e test` to migrate up the test DB
+- `test-down": "db-migrate down -e test` to migrate up the test DB
+- `dev-up: db-migrate up -e test`to migrate up the dev DB
+- `dev-down": "db-migrate down -e test"` to migrate down the dev DB
 
 ### 3. Models
 
