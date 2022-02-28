@@ -9,13 +9,23 @@ const store = new orderStore();
 
 // INDEX FUNCTION for USERS TABLE
 const index = async (req: Request, res: Response) => {
-	const users = await store.index();
-	res.json(users);
+	try {
+		const users = await store.index();
+		res.json(users);
+	} catch (err) {
+		res.status(400);
+		res.json(err);
+	}
 };
 // SHOW FUNCTION for USERS TABLE
 const show = async (req: Request, res: Response) => {
-	const user = await store.show(req.body.id);
-	res.json(user);
+	try {
+		const user = await store.show(req.body.id);
+		res.json(user);
+	} catch (err) {
+		res.status(400);
+		res.json(err);
+	}
 };
 // CREATE NEW USER FUNCTION for USERS TABLE
 const create = async (req: Request, res: Response) => {
