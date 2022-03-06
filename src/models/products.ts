@@ -7,7 +7,7 @@ dotenv.config();
 const saltRounds = 10;
 export type product = {
 	id: number;
-	name: string;
+	product_name: string;
 	price: number;
 };
 export class productStore {
@@ -45,7 +45,7 @@ export class productStore {
 				"INSERT INTO products (name, price) VALUES($1, $2) RETURNING *";
 			// @ts-ignore
 			const conn = await client.connect();
-			const result = await conn.query(sql, [p.name, p.price]);
+			const result = await conn.query(sql, [p.product_name, p.price]);
 
 			const product = result.rows[0];
 
@@ -53,7 +53,9 @@ export class productStore {
 
 			return product;
 		} catch (err) {
-			throw new Error(`Could not add new product ${p.name}. Error: ${err}`);
+			throw new Error(
+				`Could not add new product ${p.product_name}. Error: ${err}`
+			);
 		}
 	}
 }

@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { Pool } from "pg";
+import { Pool, PoolClient } from "pg";
 
 dotenv.config();
 const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_NAME_TEST, DB_PORT, ENV } =

@@ -32,7 +32,7 @@ const create = async (req: Request, res: Response) => {
 	try {
 		const product: product = {
 			id: req.body.id,
-			name: req.body.name,
+			product_name: req.body.product_name,
 			price: req.body.price,
 		};
 		const newUser = await store.create(product);

@@ -1,9 +1,6 @@
-import { StringLiteralLike } from "typescript";
 import client from "../database";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-import { Client, Connection } from "pg";
 
 dotenv.config();
 

@@ -25,3 +25,5 @@ app.listen(3000, function () {
 productRoutes(app);
 orderRoutes(app);
 userRoutes(app);
+
+export default app;
