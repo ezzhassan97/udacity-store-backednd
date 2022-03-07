@@ -41,16 +41,4 @@ describe("Test endpoint responses", () => {
 
 		done();
 	});
-	it("delets a user api endpoint", async (done) => {
-		const res = await request.delete("/users/1");
-		expect(res.status).toBe(200);
-		expect(res.body).toEqual({
-			id: 1,
-			username: "ezzhassan",
-			firstname: "ezz",
-			lastname: "hassan",
-			password_digest: "ezz",
-		});
-		done();
-	});
 });

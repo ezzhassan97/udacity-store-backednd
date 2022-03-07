@@ -1,5 +1,9 @@
 import express, { application, NextFunction, Request, Response } from "express";
-import { product, productStore } from "../models/products";
+import {
+	productReturnType,
+	productCreateType,
+	productStore,
+} from "../models/products";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 dotenv.config();
@@ -7,48 +11,47 @@ dotenv.config();
 const TOKEN_SECRET = "token_secret";
 const store = new productStore();
 
-// INDEX FUNCTION for USERS TABLE
+// INDEX FUNCTION for products TABLE
 const index = async (req: Request, res: Response) => {
 	try {
-		const users = await store.index();
-		res.json(users);
+		const products = await store.index();
+		res.json(products);
 	} catch (err) {
 		res.status(400);
 		res.json(err);
 	}
 };
-// SHOW FUNCTION for USERS TABLE
+// SHOW FUNCTION for products TABLE
 const show = async (req: Request, res: Response) => {
 	try {
-		const user = await store.show(req.body.id);
-		res.json(user);
+		const product = await store.show(req.body.id);
+		res.json(product);
 	} catch (err) {
 		res.status(400);
 		res.json(err);
 	}
 };
-// CREATE NEW USER FUNCTION for USERS TABLE
+// CREATE NEW product FUNCTION for products TABLE
 const create = async (req: Request, res: Response) => {
 	try {
-		const product: product = {
-			id: req.body.id,
+		const product: productCreateType = {
 			product_name: req.body.product_name,
 			price: req.body.price,
 		};
-		const newUser = await store.create(product);
-		var token = jwt.sign({ user: newUser }, TOKEN_SECRET);
-		res.json(token);
+		const newproduct = await store.create(product);
+		var token = jwt.sign({ product: newproduct }, TOKEN_SECRET);
+		res.json(newproduct);
 	} catch (err) {
 		res.status(400);
 		res.json(err);
 	}
 };
 
-// CRUD ROUTES for USERS TABLE
+// CRUD ROUTES for products TABLE
 const productRoutes = (app: express.Application) => {
 	app.get("/products", index);
 	app.get("/products/:id", show);
-	app.post("/products", verifyAuthToken, create);
+	app.post("/products", create);
 };
 
 const verifyAuthToken = (req: Request, res: Response, next: NextFunction) => {

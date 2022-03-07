@@ -1,4 +1,8 @@
-import { product, productStore } from "../models/products";
+import {
+	productCreateType,
+	productReturnType,
+	productStore,
+} from "../models/products";
 
 const store = new productStore();
 
@@ -24,8 +28,7 @@ describe("product Model", () => {
 	});
 
 	it("create method should add a product", async () => {
-		const result = await store.create({
-			id: 1,
+		const result: productReturnType[] = await store.create({
 			product_name: "product",
 			price: 100,
 		});
@@ -39,7 +42,7 @@ describe("product Model", () => {
 	});
 
 	it("index method should return a list of products", async () => {
-		const result = await store.index();
+		const result: productReturnType[] = await store.index();
 		expect(result).toEqual([
 			{
 				id: 1,
@@ -50,7 +53,7 @@ describe("product Model", () => {
 	});
 
 	it("show method should return the correct product", async () => {
-		const result = await store.show("1");
+		const result: productReturnType[] = await store.show(1);
 		expect(result).toEqual([
 			{
 				id: 1,

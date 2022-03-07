@@ -1,30 +1,48 @@
-import dotenv from "dotenv";
-import { Pool, PoolClient } from "pg";
+import { Pool } from "pg";
+import config from "./middleware/config";
 
-dotenv.config();
-const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_NAME_TEST, DB_PORT, ENV } =
-	process.env;
-let client: any;
-console.log(ENV);
+const pool = new Pool({
+	host: config.host,
+	port: parseInt(config.dbPort as string, 10),
+	database: config.database,
+	user: config.user,
+	password: config.password,
+});
 
-if (ENV === "test") {
-	client = new Pool({
-		host: DB_HOST,
-		port: parseInt(DB_PORT as string),
-		database: DB_NAME_TEST,
-		user: DB_USER,
-		password: DB_PASSWORD,
-	});
-}
+pool.on("error", (error: Error) => {
+	console.error(error.message);
+});
 
-if (ENV === "dev") {
-	client = new Pool({
-		host: DB_HOST,
-		port: parseInt(DB_PORT as string),
-		database: DB_NAME,
-		user: DB_USER,
-		password: DB_PASSWORD,
-	});
-}
+export default pool;
 
-export default client;
+// import dotenv from "dotenv";
+
+// import { Pool, PoolClient, Client } from "pg";
+
+// dotenv.config();
+// const { DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_NAME_TEST, DB_PORT, ENV } =
+// 	process.env;
+// let client: any;
+// console.log(ENV);
+
+// if (ENV === "test") {
+// 	client = new Client({
+// 		host: DB_HOST,
+// 		port: parseInt(DB_PORT as string),
+// 		database: DB_NAME_TEST,
+// 		user: DB_USER,
+// 		password: DB_PASSWORD,
+// 	});
+// }
+
+// if (ENV === "dev") {
+// 	client = new Client({
+// 		host: DB_HOST,
+// 		port: parseInt(DB_PORT as string),
+// 		database: DB_NAME,
+// 		user: DB_USER,
+// 		password: DB_PASSWORD,
+// 	});
+// }
+
+// export default client;
