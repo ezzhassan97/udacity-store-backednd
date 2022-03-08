@@ -3,11 +3,10 @@ import errorMiddleware from "./middleware/error.middleware";
 import morgan from "morgan";
 import helmet from "helmet";
 import cors from "cors";
-import userRoutes from "./handlers/users";
-import productRoutes from "./handlers/products";
-import orderRoutes from "./handlers/orders";
 import config from "./middleware/config";
-import db from "./database";
+import db from "./database/database";
+import routes from "./routes/index";
+
 console.log(config);
 
 // Port Address
@@ -25,6 +24,7 @@ app.use(helmet());
 // JSON PARSING
 app.use(express.json());
 // ERROR Middleware
+// app.use(errorMiddleware);
 
 // CORS
 const corsOptions = {
@@ -57,8 +57,6 @@ db.connect().then((client) => {
 		});
 });
 
-productRoutes(app);
-orderRoutes(app);
-userRoutes(app);
+app.use("/api", routes);
 
 export default app;

@@ -1,8 +1,8 @@
 /* Replace with your SQL commands */
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(100),
-    firstname VARCHAR(100),
-    lastname VARCHAR(100),
-    password_digest VARCHAR(100)
+    username VARCHAR(100) NOT NULL,
+    firstname VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL
 );
