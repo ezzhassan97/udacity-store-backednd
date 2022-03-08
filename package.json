@@ -12,7 +12,7 @@
 		"test-down": "db-migrate down -e test",
 		"dev-up": "db-migrate up -e test",
 		"dev-down": "db-migrate down -e test",
-		"test": "npm run test-up && npm run build && npm run jasmine ",
+		"test": "npm run test-up && npm run build && npm run jasmine && npm run test-down ",
 		"tsc": "tsc",
 		"build": "npx tsc"
 	},
