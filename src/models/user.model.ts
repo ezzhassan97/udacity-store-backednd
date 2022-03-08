@@ -61,6 +61,35 @@ class userModel {
 			throw new Error(`Could not show all users. Error: ${err}`);
 		}
 	}
+
+	async authenticateUser(
+		username: string,
+		password: string
+	): Promise<User | null> {
+		try {
+			const conn = await db.connect();
+			const sql = "SELECT password from users where username=($1)";
+			const result = await conn.query(sql, [username]);
+			if (result.rows.length) {
+				const { password: hashedPassword } = result.rows[0];
+				const isPasswordValid = bcrypt.compareSync(
+					`${password}${config.pepper}`,
+					hashedPassword
+				);
+				if (isPasswordValid) {
+					const userInfoQuery =
+						"SELECT id, username, firstname, lastname from users where username=($1)";
+					const userInfo = await conn.query(userInfoQuery, [username]);
+
+					return userInfo.rows[0];
+				}
+			}
+			conn.release();
+			return null;
+		} catch (err) {
+			throw new Error(`Could not find user. Error: ${err}`);
+		}
+	}
 }
 
 export default userModel;

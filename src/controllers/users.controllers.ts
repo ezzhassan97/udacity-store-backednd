@@ -50,21 +50,31 @@ export const show = async (req: Request, res: Response) => {
 };
 
 //_________ AUTHENTICATION FOR USERS _______________
-// //
-// export const verifyAuthToken = (
-// 	req: Request,
-// 	res: Response,
-// 	next: NextFunction
-// ) => {
-// 	try {
-// 		const authorizationHeader = req.headers.authorization;
-// 		const token = authorizationHeader
-// 			? authorizationHeader.split(" ")[1]
-// 			: "dummytoken";
-// 		const decoded = jwt.verify(token, TOKEN_SECRET);
-// 		return decoded;
-// 		next();
-// 	} catch (error) {
-// 		res.status(401);
-// 	}
-// };
+//
+export const authenticate = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+) => {
+	try {
+		const { username, password } = req.body;
+		const authenticatedUser = await user.authenticateUser(username, password);
+		const token = jwt.sign(
+			{ authenticatedUser },
+			config.tokenSecret as unknown as string
+		);
+
+		if (authenticatedUser) {
+			return res.json({ ...authenticatedUser, token });
+		}
+		if (!authenticatedUser) {
+			return res.status(400).json({
+				message: "username & password do not match",
+			});
+		}
+
+		next();
+	} catch (error) {
+		res.status(401);
+	}
+};

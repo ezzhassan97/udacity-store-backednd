@@ -7,8 +7,6 @@ import config from "./middleware/config";
 import db from "./database/database";
 import routes from "./routes/index";
 
-console.log(config);
-
 // Port Address
 const port = config.port;
 // Create App instance
@@ -49,11 +47,11 @@ db.connect().then((client) => {
 		.query("SELECT NOW()")
 		.then((res) => {
 			client.release();
-			console.log(res.rows);
+			console.log("DATABASE CONNECTED SUCCESSFULLY 😇");
 		})
 		.catch((err) => {
 			client.release();
-			console.log(err.stack);
+			console.log("DATABASE NOT CONNECTED 😒");
 		});
 });
 
