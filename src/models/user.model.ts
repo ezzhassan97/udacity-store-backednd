@@ -1,6 +1,13 @@
-import pool from "../database/database";
 import db from "../database/database";
 import User from "../types/user.type";
+import bcrypt from "bcrypt";
+import config from "../middleware/config";
+
+const hashPassword = (password: string) => {
+	const pepper = config.pepper;
+	const saltRounds = parseInt(config.saltRounds as string, 10);
+	return bcrypt.hashSync(`${password}${pepper}`, saltRounds);
+};
 
 class userModel {
 	// Create user function
@@ -14,7 +21,7 @@ class userModel {
 				u.username,
 				u.firstname,
 				u.lastname,
-				u.password,
+				hashPassword(u.password),
 			]);
 
 			const user = result.rows[0];

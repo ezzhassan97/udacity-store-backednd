@@ -11,6 +11,8 @@ const {
 	DB_PORT,
 	DB_USER,
 	DB_PASSWORD,
+	BCRYPT_PASSWORD,
+	SALT_ROUNDS,
 } = process.env;
 export default {
 	port: PORT,
@@ -20,4 +22,6 @@ export default {
 	dbPort: DB_PORT,
 	user: DB_USER,
 	password: DB_PASSWORD,
+	pepper: BCRYPT_PASSWORD,
+	saltRounds: SALT_ROUNDS,
 };
